@@ -1,4 +1,4 @@
-import cv2
+from cv2 import cv2
 import dlib
 from imutils import face_utils
 
@@ -37,16 +37,36 @@ def test_dlib(image):
 
     # Load the input image and convert it to grayscale
     image = cv2.imread(image)
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
-    cv2.imshow("Output", image)
-    cv2.waitKey(0)
+    # Detect faces in the grayscale image
+    rects = detector(gray, 0)
+
+    # Loop over the face detections
+    for (i, rect) in enumerate(rects):
+        # determine the facial landmarks for the face region, then
+        # convert the facial landmark (x, y)-coordinates to a NumPy
+        # array
+        shape = predictor(gray, rect)
+        shape = face_utils.shape_to_np(shape)
+        # loop over the (x, y)-coordinates for the facial landmarks
+        # and draw them on the image
+        for (x, y) in shape:
+            cv2.circle(image, (x, y), 8, (0, 255, 0), -1)
+
+    return image
+
 
 def main():
     print('Init project')
     path_image = "./image/test_dlib/thang.jpg"
 
     # test Dlib
-    test_dlib(path_image)
+    image = test_dlib(path_image)
+
+    # Show image
+    cv2.imshow("Output", image)
+    cv2.waitKey(0)
 
     # Init Dlib
 
