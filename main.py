@@ -97,7 +97,7 @@ def test_dlib(image):
     # loop over the (x, y)-coordinates for the facial landmarks
     # and draw them on the image
     for (x, y) in shape:
-        cv2.circle(image, (x, y), 8, (0, 255, 0), -1)
+        cv2.circle(image, (x, y), 8, (255, 0, 0), -1)
 
     # TODO: Lấy toạ độ khuôn mặt (top left, bottom right)
 
@@ -120,10 +120,10 @@ def main():
 
     # Using cv2.rectangle() method
     # Draw a rectangle with blue line borders of thickness of 2 px
-    color = (255, 0, 0)
-    thickness = 2
-    # image = cv2.rectangle(image, test_nguyen[0], test_nguyen[1], color=color, thickness=2)
-    image = cv2.rectangle(image, position_of_face[0], position_of_face[1], color=color, thickness=thickness)
+    color = (0, 255, 0)   # Green
+    thickness = 5
+    # image = cv2.rectangle(image, test_nguyen[0], test_nguyen[1], color=color, thickness=thickness)
+    # image = cv2.rectangle(image, position_of_face[0], position_of_face[1], color=color, thickness=thickness)
 
     # Show image
     cv2.imshow("Output", image)
