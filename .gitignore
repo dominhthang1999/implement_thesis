@@ -131,5 +131,5 @@ dmypy.json
 .pyre/
 shape_predictor_68_face_landmarks.dat
 .vscode
-*data
+data/
 data/label_image.json
