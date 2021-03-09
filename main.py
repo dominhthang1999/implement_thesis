@@ -1,3 +1,4 @@
+import imutils
 from cv2 import cv2
 import dlib
 from imutils import face_utils
@@ -83,6 +84,8 @@ def test_dlib(image):
 
     # Load the input image and convert it to grayscale
     image = cv2.imread(image)
+    image = imutils.resize(image, width=720)
+
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
     # Detect faces in the grayscale image
@@ -97,7 +100,7 @@ def test_dlib(image):
     # loop over the (x, y)-coordinates for the facial landmarks
     # and draw them on the image
     for (x, y) in shape:
-        cv2.circle(image, (x, y), 8, (255, 0, 0), -1)
+        cv2.circle(image, (x, y), 4, (255, 0, 0), -1)
 
     # TODO: Lấy toạ độ khuôn mặt (top left, bottom right)
 
@@ -116,16 +119,79 @@ def main():
     position_of_face = get_position_border_of_face(shape_68_point)
     test_nguyen = dimensionsFace(shape_68_point)
     # check = bool(position_of_face == test_nguyen)
-    print('position_of_face: ', test_nguyen)
+    print('position_of_face: ', position_of_face)
 
     # Using cv2.rectangle() method
     # Draw a rectangle with blue line borders of thickness of 2 px
-    color = (0, 255, 0)   # Green
-    thickness = 5
+    color = (0, 255, 0)  # Green
+    thickness = 2
     # image = cv2.rectangle(image, test_nguyen[0], test_nguyen[1], color=color, thickness=thickness)
     # image = cv2.rectangle(image, position_of_face[0], position_of_face[1], color=color, thickness=thickness)
 
     # Show image
+    # cv2.imshow("Output", image)
+    # cv2.waitKey(0)
+
+    import numpy as np
+    import cv2 as cv
+    # Create a black image
+    # Draw a diagonal blue line with thickness of 5 px
+
+    '''
+    name: Left_Cheek,	 array_contour [[131 496]
+    [307 469]
+    [278 660]
+    [218 743]]
+    '''
+    cv2.line(image, (131, 496), (307, 469), color, 2)
+    cv2.line(image, (307, 469), (278, 660), color, 2)
+    cv2.line(image, (278, 660), (218, 743), color, 2)
+    cv2.line(image, (218, 743), (131, 496), color, 2)
+
+    '''
+        name: Right_Cheek,	 array_contour [[575 521]
+     [432 469]
+     [460 658]
+     [493 746]]
+     '''
+    cv2.line(image, (575, 521), (432, 469), color, 2)
+    cv2.line(image, (432, 469), (460, 658), color, 2)
+    cv2.line(image, (460, 658), (493, 746), color, 2)
+    cv2.line(image, (493, 746), (575, 521), color, 2)
+
+    '''
+    name: Forehead,	 array_contour [[199 328]
+     [244, 210]
+     [504  210]
+     [545 346]]
+    '''
+    cv2.line(image, (199, 328), (244, 210), color, 2)
+    cv2.line(image, (244, 210), (504, 210), color, 2)
+    cv2.line(image, (504, 210), (545, 346), color, 2)
+    cv2.line(image, (545, 346), (199, 328), color, 2)
+
+    '''
+    name: Chin,	 array_contour [[278 732]
+     [257 789]
+     [457 793]
+     [460 732]]
+    '''
+    cv2.line(image, (278, 732), (257, 789), color, 2)
+    cv2.line(image, (257, 789), (457, 793), color, 2)
+    cv2.line(image, (457, 793), (460, 732), color, 2)
+    cv2.line(image, (460, 732), (278, 732), color, 2)
+
+    '''
+    name: Nose,	 array_contour [[334 362]
+     [419 364]
+     [318 552]
+     [427 552]]
+     '''
+    cv2.line(image, (334, 362), (419, 364), color, 2)
+    cv2.line(image, (419, 364), (427, 552), color, 2)
+    cv2.line(image, (318, 552), (334, 362), color, 2)
+    cv2.line(image, (427, 552), (318, 552), color, 2)
+
     cv2.imshow("Output", image)
     cv2.waitKey(0)
 
