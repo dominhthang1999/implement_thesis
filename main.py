@@ -22,6 +22,30 @@ from PIL import Image
 import pandas
 from collections import Counter
 
+# Get coordinates from data
+def get_coordinates(center, size):
+    # Check input
+    if not center or not size:
+        print("Error: Cannot get coordinates")
+        return None
+    
+    # get position
+    x_bottom_right  = int(center['x'] + size['x']/2)
+    x_top_left      = int(center['x'] - size['x']/2)
+    y_bottom_right  = int(center['y'] - size['y']/2)
+    y_top_left      = int(center['y'] + size['y']/2)
+
+    bottom_right  = (x_bottom_right, y_bottom_right)
+    top_left      = (x_top_left, y_top_left)
+
+    return top_left, bottom_right 
+
+
+# Connect Database
+
+# Process data
+
+# 
 
 def main():
     print('main')
