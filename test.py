@@ -1,5 +1,6 @@
 import unittest
 import main
+import json
 
 
 class Testing(unittest.TestCase):
@@ -29,3 +30,9 @@ class Testing(unittest.TestCase):
                    "-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true "
         db = main.get_database(path_url)
         self.assertTrue(db)
+
+    def test_get_default_size_for_roi(self):
+        with open('input_json.json') as input_json:
+            input_json = json.load(input_json)
+            DEFAULT_SIZE = main.get_default_size_for_roi(input_json['json_file']['labels'])
+            self.assertEqual(31, DEFAULT_SIZE)
